@@ -47,5 +47,6 @@
 			}
 		},
 		"travis-cov": { "threshold": -1 }
-	}
+	},
+	"license": "MIT"
 }
