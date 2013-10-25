@@ -1,6 +1,8 @@
 hapi-statsd
 ===========
 
+[![Code Climate](https://codeclimate.com/github/mac-/hapi-statsd.png)](https://codeclimate.com/github/mac-/hapi-statsd)
+
 A hapi plugin for sending request round trip metrics to statsd
 
 
