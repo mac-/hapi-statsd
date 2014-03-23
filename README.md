@@ -2,6 +2,11 @@ hapi-statsd
 ===========
 
 [![Code Climate](https://codeclimate.com/github/mac-/hapi-statsd.png)](https://codeclimate.com/github/mac-/hapi-statsd)
+[![Build Status](https://secure.travis-ci.org/mac-/hapi-statsd.png)](http://travis-ci.org/mac-/hapi-statsd)
+[![NPM version](https://badge.fury.io/js/hapi-statsd.png)](http://badge.fury.io/js/hapi-statsd)
+[![Dependency Status](https://david-dm.org/mac-/hapi-statsd.png)](https://david-dm.org/mac-/hapi-statsd)
+
+[![NPM](https://nodei.co/npm/hapi-statsd.png?downloads=true&stars=true)](https://nodei.co/npm/hapi-statsd/)
 
 A hapi plugin for sending request round trip metrics to statsd
 
@@ -28,8 +33,4 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mac-/hapi-statsd/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
