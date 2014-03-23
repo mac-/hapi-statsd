@@ -4,7 +4,7 @@
 	"contributors": [
 		"Mac Angell <mac.ang311@gmail.com>"
 	],
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"dependencies": {
 		"statsd-client": "0.x.x",
 		"eidetic": "0.x.x"
@@ -12,11 +12,12 @@
 	"devDependencies": {
 		"mocha": "1.x.x",
 		"jshint": "2.x.x",
-		"travis-cov": "0.2.x",
-		"blanket": "1.0.x"
+		"travis-cov": "0.x.x",
+		"blanket": "1.x.x",
+		"node-dependencies": "0.x.x"
 	},
 	"peerDependencies": {
-		"hapi": "1.x.x"
+		"hapi": "3.x.x"
 	},
 	"keywords": [
 		"hapi",
@@ -38,7 +39,9 @@
 		"url": "git@github.com:mac-/hapi-statsd.git"
 	},
 	"scripts": {
-		"test": "make test && make test-cov",
+		"test": "make test && make test-cov"
+	},
+	"config": {
 		"blanket": {
 			"pattern": "//^((?!\/node_modules\/)(?!\/test\/).)*$/ig",
 			"onlyCwd": true,
