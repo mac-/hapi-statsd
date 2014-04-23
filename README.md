@@ -79,11 +79,12 @@ would send an increment and timing stat to statsd with the following stat name (
 
 ## Version Compatibility
 
-### Currently compatible with: Hapi 3.x.x
+### Currently compatible with: Hapi 4.x.x
 
 * 0.1.x - Hapi 1.x.x
 * 0.2.x - Hapi 3.x.x
 * 0.3.x - Hapi 3.x.x
+* 0.4.x - Hapi 4.x.x
 
 # License
 
