@@ -19,10 +19,11 @@ var assert = require('assert'),
 
 beforeEach(function(done) {
 	server = new Hapi.Server('localhost', '8085', { cors: true } );
-	server.pack.register(plugin, { statsdClient: mockStatsdClient }, function(err) {
-
+	server.pack.register({
+		plugin: plugin,
+		options: { statsdClient: mockStatsdClient }
+	}, function (err) {
 		var get = function (request, reply) {
-
 			reply('Success!');
 		};
 

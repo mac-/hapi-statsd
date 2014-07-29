@@ -16,12 +16,12 @@
 		"travis-cov": "0.x.x",
 		"blanket": "1.x.x",
 		"node-dependencies": "0.x.x",
-		"hapi": "4.x.x",
+		"hapi": "6.x.x",
 		"coveralls": "2.x.x",
 		"mocha-lcov-reporter": "0.x.x"
 	},
 	"peerDependencies": {
-		"hapi": "4.x.x"
+		"hapi": "6.x.x"
 	},
 	"keywords": [
 		"hapi",
