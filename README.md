@@ -46,9 +46,13 @@ Defaults to `'{path}.{method}.{statusCode}'`
 
 An instance of a particular statsd client that you prefer to use for sending metrics to statsd. If this is used, then the `statsdHost` and `prefix` options are ignored. Defaults to `null`
 
-### `statsdHost`
+### `host`
 
-The host and port that an instance of statsd is running on. An instance of the `statsd-client` NPM module will be created and will be configured to use this host and port. Defaults to `'localhost:8125'`
+The host athat an instance of statsd is running on. An instance of the `statsd-client` NPM module will be created and will be configured to use this host. Defaults to `'localhost'`
+
+### `port`
+
+The port that an instance of statsd is listening on. An instance of the `statsd-client` NPM module will be created and will be configured to use this port. Defaults to `8125`
 
 ### `prefix`
 
@@ -79,12 +83,13 @@ would send an increment and timing stat to statsd with the following stat name (
 
 ## Version Compatibility
 
-### Currently compatible with: Hapi 4.x.x
+### Currently compatible with: Hapi 6.x.x
 
 * 0.1.x - Hapi 1.x.x
 * 0.2.x - Hapi 3.x.x
 * 0.3.x - Hapi 3.x.x
 * 0.4.x - Hapi 4.x.x
+* 1.0.x - Hapi 6.x.x
 
 # License
 
