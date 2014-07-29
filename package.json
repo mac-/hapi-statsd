@@ -1,59 +1,61 @@
 {
-	"name": "hapi-statsd",
-	"description": "A hapi plugin for sending request round trip metrics to statsd",
-	"contributors": [
-		"Mac Angell <mac.ang311@gmail.com>"
-	],
-	"version": "0.4.1",
-	"dependencies": {
-		"statsd-client": "0.x.x",
-		"eidetic": "0.x.x",
-		"hoek": "2.x.x"
-	},
-	"devDependencies": {
-		"mocha": "1.x.x",
-		"jshint": "2.x.x",
-		"travis-cov": "0.x.x",
-		"blanket": "1.x.x",
-		"node-dependencies": "0.x.x",
-		"hapi": "4.x.x",
-		"coveralls": "2.x.x",
-		"mocha-lcov-reporter": "0.x.x"
-	},
-	"peerDependencies": {
-		"hapi": "4.x.x"
-	},
-	"keywords": [
-		"hapi",
-		"plugin",
-		"statsd",
-		"graphite",
-		"metrics",
-		"instrumentation",
-		"stats",
-		"request",
-		"round trip"
-	],
-	"engines": {
-		"node": ">=0.10.0"
-	},
-	"main": "./lib/hapi-statsd.js",
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:mac-/hapi-statsd.git"
-	},
-	"scripts": {
-		"test": "make test && make test-cov && make test-lcov | ./node_modules/coveralls/bin/coveralls.js"
-	},
-	"config": {
-		"blanket": {
-			"pattern": "//^((?!\/node_modules\/)(?!\/test\/).)*$/ig",
-			"onlyCwd": true,
-			"data-cover-flags": {
-				"branchTracking": true
-			}
-		},
-		"travis-cov": { "threshold": -1 }
-	},
-	"license": "MIT"
+  "name": "hapi-statsd",
+  "description": "A hapi plugin for sending request round trip metrics to statsd",
+  "contributors": [
+    "Mac Angell <mac.ang311@gmail.com>"
+  ],
+  "version": "0.5.0",
+  "dependencies": {
+    "statsd-client": "0.x.x",
+    "eidetic": "0.x.x",
+    "hoek": "2.x.x"
+  },
+  "devDependencies": {
+    "mocha": "1.x.x",
+    "jshint": "2.x.x",
+    "travis-cov": "0.x.x",
+    "blanket": "1.x.x",
+    "node-dependencies": "0.x.x",
+    "hapi": "6.x.x",
+    "coveralls": "2.x.x",
+    "mocha-lcov-reporter": "0.x.x"
+  },
+  "peerDependencies": {
+    "hapi": "6.x.x"
+  },
+  "keywords": [
+    "hapi",
+    "plugin",
+    "statsd",
+    "graphite",
+    "metrics",
+    "instrumentation",
+    "stats",
+    "request",
+    "round trip"
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "main": "./lib/hapi-statsd.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mac-/hapi-statsd.git"
+  },
+  "scripts": {
+    "test": "make test && make test-cov && make test-lcov | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "//^((?!/node_modules/)(?!/test/).)*$/ig",
+      "onlyCwd": true,
+      "data-cover-flags": {
+        "branchTracking": true
+      }
+    },
+    "travis-cov": {
+      "threshold": -1
+    }
+  },
+  "license": "MIT"
 }
