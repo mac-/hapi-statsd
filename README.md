@@ -30,6 +30,20 @@ server.pack.require('hapi-statsd', hapiStatsdConfig, function(err) {
 });
 ```
 
+for Hapi 6.x.x
+```js
+var Hapi = require('hapi');
+var server = new Hapi.Server();
+
+var hapiStatsdConfig = {};
+
+server.pack.register({ plugin: require('hapi-statsd'), options: hapiStatsdConfig }, function(err) {
+	if (err) {
+		console.log('error', 'Failed loading plugin: hapi-statsd');
+	}
+});
+```
+
 ## Plugin Options
 
 ### `template`
