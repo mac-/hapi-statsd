@@ -4,7 +4,7 @@
 	"contributors": [
 		"Mac Angell <mac.ang311@gmail.com>"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"dependencies": {
 		"statsd-client": "0.x.x",
 		"eidetic": "0.x.x",
@@ -21,7 +21,7 @@
 		"mocha-lcov-reporter": "0.x.x"
 	},
 	"peerDependencies": {
-		"hapi": "6.x.x"
+		"hapi": "6.9.x"
 	},
 	"keywords": [
 		"hapi",
