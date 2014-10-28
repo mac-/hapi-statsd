@@ -9,6 +9,24 @@
 
 A hapi plugin for sending request round trip metrics to statsd
 
+## Contributing
+
+This module makes use of a `Makefile` for building/testing purposes. After obtaining a copy of the repo, run the following commands to make sure everything is in working condition before you start your work:
+
+	make install
+	make test
+
+Before committing a change to your fork/branch, run the following commands to make sure nothing is broken:
+
+	make test
+	make test-cov
+
+Don't forget to bump the version in the `package.json` using the [semver](http://semver.org/spec/v2.0.0.html) spec as a guide for which part to bump. Submit a pull request when your work is complete.
+
+***Notes:***
+* Please do your best to ensure the code coverage does not drop. If new unit tests are required to maintain the same level of coverage, please include those in your pull request.
+* Please follow the same coding/formatting practices that have been established in the module.
+
 ## Installation
 
 	npm install hapi-statsd
@@ -17,20 +35,6 @@ A hapi plugin for sending request round trip metrics to statsd
 
 To install this plugin on your Hapi server, do something similar to this:
 
-```js
-var Hapi = require('hapi');
-var server = new Hapi.Server();
-
-var hapiStatsdConfig = {};
-
-server.pack.require('hapi-statsd', hapiStatsdConfig, function(err) {
-	if (err) {
-		console.log('error', 'Failed loading plugin: hapi-statsd');
-	}
-});
-```
-
-for Hapi 6.x.x
 ```js
 var Hapi = require('hapi');
 var server = new Hapi.Server();
@@ -97,13 +101,14 @@ would send an increment and timing stat to statsd with the following stat name (
 
 ## Version Compatibility
 
-### Currently compatible with: Hapi 6.x.x
+### Currently compatible with: Hapi 7.x.x
 
 * 0.1.x - Hapi 1.x.x
 * 0.2.x - Hapi 3.x.x
 * 0.3.x - Hapi 3.x.x
 * 0.4.x - Hapi 4.x.x
 * 1.0.x - Hapi 6.x.x
+* 1.1.x - Hapi 7.x.x
 
 # License
 
