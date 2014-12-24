@@ -4,7 +4,7 @@
 	"contributors": [
 		"Mac Angell <mac.ang311@gmail.com>"
 	],
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"dependencies": {
 		"statsd-client": "0.x.x",
 		"eidetic": "0.x.x",
