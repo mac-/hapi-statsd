@@ -30,7 +30,12 @@ beforeEach(function(done) {
 		reply('Success!');
 	};
 
+	var err = function (request, reply) {
+		reply(new Error());
+	};
+
 	server.route({ method: 'GET', path: '/', handler: get });
+	server.route({ method: 'GET', path: '/err', handler: err });
 	server.route({ method: 'GET', path: '/test/{param}', handler: get });
 
 	server.register({
@@ -81,6 +86,14 @@ describe('hapi-statsd plugin tests', function() {
 			assert(mockStatsdClient.incStat == '{cors*}.OPTIONS.200');
 			assert(mockStatsdClient.timingStat == '{cors*}.OPTIONS.200');
 			assert(mockStatsdClient.timingDate instanceof Date);
+			done();
+		});
+	});
+
+	it('should not change the status code of a response', function(done) {
+
+		server.inject('/err', function (res) {
+			assert(res.statusCode === 500);
 			done();
 		});
 	});
