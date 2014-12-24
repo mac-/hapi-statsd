@@ -42,7 +42,7 @@ var server = new Hapi.Server();
 
 var hapiStatsdConfig = {};
 
-server.pack.register({ plugin: require('hapi-statsd'), options: hapiStatsdConfig }, function(err) {
+server.register({ plugin: require('hapi-statsd'), options: hapiStatsdConfig }, function(err) {
 	if (err) {
 		console.log('error', 'Failed loading plugin: hapi-statsd');
 	}
@@ -102,7 +102,7 @@ would send an increment and timing stat to statsd with the following stat name (
 
 ## Version Compatibility
 
-### Currently compatible with: Hapi 7.x.x
+### Currently compatible with: Hapi 8.x.x
 
 * 0.1.x - Hapi 1.x.x
 * 0.2.x - Hapi 3.x.x
@@ -110,6 +110,7 @@ would send an increment and timing stat to statsd with the following stat name (
 * 0.4.x - Hapi 4.x.x
 * 1.0.x - Hapi 6.x.x
 * 1.1.x - Hapi 7.x.x
+* 1.2.x - Hapi 8.x.x
 
 # License
 
