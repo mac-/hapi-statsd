@@ -18,23 +18,26 @@ var assert = require('assert'),
 	Hapi = require('hapi');
 
 beforeEach(function(done) {
-	server = new Hapi.Server('localhost', '8085', { cors: true } );
-	server.pack.register({
-		plugin: plugin,
-		options: { statsdClient: mockStatsdClient }
-	}, function (err) {
-		var get = function (request, reply) {
-			reply('Success!');
-		};
+	server = new Hapi.Server();
 
-		server.route({ method: 'GET', path: '/', handler: get });
-		server.route({ method: 'GET', path: '/test/{param}', handler: get });
-
-		done(err);
+	server.connection({ 
+		host: 'localhost', 
+		port: 8085,
+		routes: { cors: true }
 	});
+
+	var get = function (request, reply) {
+		reply('Success!');
+	};
+
+	server.route({ method: 'GET', path: '/', handler: get });
+	server.route({ method: 'GET', path: '/test/{param}', handler: get });
+
+	server.register({
+		register: plugin,
+		options: { statsdClient: mockStatsdClient }
+	}, done);
 });
-
-
 
 describe('hapi-statsd plugin tests', function() {
 
