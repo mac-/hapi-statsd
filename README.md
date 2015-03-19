@@ -42,7 +42,7 @@ var server = new Hapi.Server();
 
 var hapiStatsdConfig = {};
 
-server.register({ plugin: require('hapi-statsd'), options: hapiStatsdConfig }, function(err) {
+server.register({ register: require('hapi-statsd'), options: hapiStatsdConfig }, function(err) {
 	if (err) {
 		console.log('error', 'Failed loading plugin: hapi-statsd');
 	}
