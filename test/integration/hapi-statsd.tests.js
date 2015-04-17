@@ -20,8 +20,8 @@ var assert = require('assert'),
 beforeEach(function(done) {
 	server = new Hapi.Server();
 
-	server.connection({ 
-		host: 'localhost', 
+	server.connection({
+		host: 'localhost',
 		port: 8085,
 		routes: { cors: true }
 	});
@@ -45,6 +45,11 @@ beforeEach(function(done) {
 });
 
 describe('hapi-statsd plugin tests', function() {
+
+	it('should expose statsd client to the hapi server', function() {
+
+		assert.equal(server.statsd, mockStatsdClient);
+	});
 
 	it('should report stats with no path in stat name', function(done) {
 
