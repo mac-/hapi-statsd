@@ -17,7 +17,7 @@
 		"blanket": "1.x.x",
 		"node-dependencies": "0.x.x",
 		"hapi": "8.x.x",
-		"coveralls": "2.10.x",
+		"coveralls": "2.x.x",
 		"mocha-lcov-reporter": "0.x.x"
 	},
 	"peerDependencies": {
