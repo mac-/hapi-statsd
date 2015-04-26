@@ -8,7 +8,7 @@
 
 [![NPM](https://nodei.co/npm/hapi-statsd.png?downloads=true&stars=true)](https://nodei.co/npm/hapi-statsd/)
 
-A hapi plugin for sending request round trip metrics to statsd
+A hapi plugin for sending request round trip metrics to statsd, also exposing statsd client to the server.
 
 ## Contributing
 
@@ -99,6 +99,14 @@ server.route({
 would send an increment and timing stat to statsd with the following stat name (assuming all options are set to their defaults):
 
 	hapi.test_{param}.GET.200
+
+As the [statsd client](https://github.com/msiebuhr/node-statsd-client) is also exposed to the hapi server, you can use any of its methods, e.g.:
+
+```js
+server.statsd.increment('systemname.subsystem.value');
+server.statsd.gauge('what.you.gauge', 100);
+server.statsd.set('your.set', 200);
+```
 
 ## Version Compatibility
 
