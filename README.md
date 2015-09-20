@@ -110,7 +110,7 @@ server.statsd.set('your.set', 200);
 
 ## Version Compatibility
 
-### Currently compatible with: Hapi 9.x.x
+### Currently compatible with: Hapi 10.x.x (Node v4)
 
 * 0.1.x - Hapi 1.x.x
 * 0.2.x - Hapi 3.x.x
@@ -120,6 +120,7 @@ server.statsd.set('your.set', 200);
 * 1.1.x - Hapi 7.x.x
 * 1.2.x - Hapi 8.x.x
 * 2.x.x - Hapi 9.x.x
+* 3.x.x - Hapi 10.x.x (Node v4)
 
 # License
 
