@@ -22,8 +22,7 @@ beforeEach(function(done) {
 
 	server.connection({
 		host: 'localhost',
-		port: 8085,
-		routes: { cors: true }
+		port: 8085
 	});
 
 	var get = function (request, reply) {
@@ -34,9 +33,9 @@ beforeEach(function(done) {
 		reply(new Error());
 	};
 
-	server.route({ method: 'GET', path: '/', handler: get });
-	server.route({ method: 'GET', path: '/err', handler: err });
-	server.route({ method: 'GET', path: '/test/{param}', handler: get });
+	server.route({ method: ['GET','OPTIONS'], path: '/', handler: get, config: {cors: true}});
+	server.route({ method: 'GET', path: '/err', handler: err, config: {cors: true} });
+	server.route({ method: 'GET', path: '/test/{param}', handler: get, config: {cors: true}});
 
 	server.register({
 		register: plugin,
