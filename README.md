@@ -81,6 +81,9 @@ The prefix to add to every stat collected. Usually used for grouping a set of st
 
 A character or set of characters to replace the '/' (forward slash) characters in your URL path since forward slashes cannot be used in stat names. Defaults to `'_'`
 
+### `dotReplacer`
+A character or set of characters to replace the '.' (dot) characters in your URL path since dots have other meanings. Defaults to `'-'`
+
 
 ## Example
 
@@ -110,7 +113,7 @@ server.statsd.set('your.set', 200);
 
 ## Version Compatibility
 
-### Currently compatible with: Hapi 11.x.x (Node v4)
+### Currently compatible with: Hapi 13.x.x (Node v4)
 
 * 0.1.x - Hapi 1.x.x
 * 0.2.x - Hapi 3.x.x
@@ -122,6 +125,8 @@ server.statsd.set('your.set', 200);
 * 2.x.x - Hapi 9.x.x
 * 3.x.x - Hapi 10.x.x (Node v4)
 * 4.x.x - Hapi 11.x.x
+* 4.x.x - Hapi 12.x.x
+* 4.x.x - Hapi 13.x.x
 
 # License
 
