@@ -145,25 +145,4 @@ describe( 'hapi-statsd()', () => {
         }, done );
     } );
 
-    it( 'should work with path not starting with /', (done) => {
-
-        server = new Hapi.Server();
-
-        server.connection( {
-            host: 'localhost',
-            port: 8085
-        } );
-
-        const get = (request, reply) => reply( 'Success!' );
-        const err = (request, reply) => reply( new Error() );
-
-        server.route( { method: ['GET', 'OPTIONS'], path: 'test', handler: get, config: { cors: true } } );
-        server.route( { method: 'GET', path: '/err', handler: err, config: { cors: true } } );
-        server.route( { method: 'GET', path: '/test/{param}', handler: get, config: { cors: true } } );
-
-        server.register( {
-            register: Plugin
-        }, done );
-    } );
-
 } );
