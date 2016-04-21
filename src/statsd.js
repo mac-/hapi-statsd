@@ -14,7 +14,7 @@ const defaults = {
 
 module.exports.register = function (server, options, next) {
 
-    const settings = Hoek.applyToDefaults(defaults, options || {});
+    const settings = Hoek.applyToDefaults(defaults, options);
     const statsdClient = options.statsdClient || new StatsdClient(settings);
     const normalizePath = (path) => {
 
@@ -35,7 +35,7 @@ module.exports.register = function (server, options, next) {
         if (request._route === specials.notFound.route) {
             path = '/{notFound*}';
         }
-        else if (specials.options && request._route === specials.options.route) {
+        else if (request._route === specials.options.route) {
             path = '/{cors*}';
         }
         else if (request._route.path === '/' && request._route.method === 'options') {

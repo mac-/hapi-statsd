@@ -41,15 +41,18 @@ beforeEach( (done) => {
 
     server.connection( {
         host: 'localhost',
-        port: 8085
+        port: 8085,
+        routes:{ cors:true }
     } );
 
     const get = (request, reply) => reply( 'Success!' );
+    const post = (request, reply) => reply( 'Success!' );
     const err = (request, reply) => reply( new Error() );
 
     server.route( { method: ['GET', 'OPTIONS'], path: '/', handler: get, config: { cors: true } } );
     server.route( { method: 'GET', path: '/err', handler: err, config: { cors: true } } );
-    server.route( { method: 'GET', path: '/test/{param}', handler: get, config: { cors: true } } );
+    server.route( { method: 'GET', path: '/test/{param}', handler: get } );
+    server.route( { method: 'POST', path: '/test/{param}', handler: post, config: { cors: false } } );
 
     server.register( {
         register: Plugin,
@@ -106,6 +109,42 @@ describe( 'bluestatsd()', () => {
                 Origin: 'http://test.domain.com'
             },
             url: '/'
+        }, () => {
+
+            Assert( mockStatsdClient.incStat === '{cors*}.OPTIONS.200' );
+            Assert( mockStatsdClient.timingStat === '{cors*}.OPTIONS.200' );
+            Assert( mockStatsdClient.timingDate instanceof Date );
+            done();
+        } );
+    } );
+
+    it( 'should report stats with another generic CORS path', (done) => {
+
+        server.inject( {
+            method: 'OPTIONS',
+            headers: {
+                Origin: 'http://test.domain.com',
+                'access-control-request-method': 'GET'
+            },
+            url: '/test/123'
+        }, () => {
+
+            Assert( mockStatsdClient.incStat === '{cors*}.OPTIONS.200' );
+            Assert( mockStatsdClient.timingStat === '{cors*}.OPTIONS.200' );
+            Assert( mockStatsdClient.timingDate instanceof Date );
+            done();
+        } );
+    } );
+
+    it( 'should report stats with generic non-CORS path', (done) => {
+
+        server.inject( {
+            method: 'OPTIONS',
+            headers: {
+                Origin: 'http://test.domain.com',
+                'access-control-request-method': 'POST'
+            },
+            url: '/test/123'
         }, () => {
 
             Assert( mockStatsdClient.incStat === '{cors*}.OPTIONS.200' );
