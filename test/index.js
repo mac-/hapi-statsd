@@ -57,7 +57,7 @@ beforeEach( (done) => {
     }, done );
 } );
 
-describe( 'hapi-statsd()', () => {
+describe( 'bluestatsd()', () => {
 
     it( 'should expose statsd client to the hapi server', (done) => {
 
