@@ -1,10 +1,10 @@
-# hapi-statsd
+# bluestatsd
 
-[![Build Status](https://secure.travis-ci.org/mac-/hapi-statsd.png)](http://travis-ci.org/mac-/hapi-statsd)
-[![Coverage Status](https://coveralls.io/repos/mac-/hapi-statsd/badge.png)](https://coveralls.io/r/mac-/hapi-statsd)
-[![Code Climate](https://codeclimate.com/github/mac-/hapi-statsd.png)](https://codeclimate.com/github/mac-/hapi-statsd)
+[![Build Status](https://secure.travis-ci.org/catalint/bluestatsd.png)](http://travis-ci.org/catalint/bluestatsd)
+[![Coverage Status](https://coveralls.io/repos/catalint/bluestatsd/badge.png)](https://coveralls.io/r/catalint/bluestatsd)
+[![Code Climate](https://codeclimate.com/github/catalint/bluestatsd.png)](https://codeclimate.com/github/catalint/bluestatsd)
 [![NPM version](https://badge.fury.io/js/hapi-statsd.png)](http://badge.fury.io/js/hapi-statsd)
-[![Dependency Status](https://david-dm.org/mac-/hapi-statsd.png)](https://david-dm.org/mac-/hapi-statsd)
+[![Dependency Status](https://david-dm.org/catalint/bluestatsd.png)](https://david-dm.org/catalint/bluestatsd)
 
 [![NPM](https://nodei.co/npm/hapi-statsd.png?downloads=true&stars=true)](https://nodei.co/npm/hapi-statsd/)
 
