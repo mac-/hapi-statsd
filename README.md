@@ -3,10 +3,10 @@
 [![Build Status](https://secure.travis-ci.org/catalint/bluestatsd.png)](http://travis-ci.org/catalint/bluestatsd)
 [![Coverage Status](https://coveralls.io/repos/catalint/bluestatsd/badge.png)](https://coveralls.io/r/catalint/bluestatsd)
 [![Code Climate](https://codeclimate.com/github/catalint/bluestatsd.png)](https://codeclimate.com/github/catalint/bluestatsd)
-[![NPM version](https://badge.fury.io/js/hapi-statsd.png)](http://badge.fury.io/js/hapi-statsd)
+[![NPM version](https://badge.fury.io/js/bluestatsd.png)](http://badge.fury.io/js/bluestatsd)
 [![Dependency Status](https://david-dm.org/catalint/bluestatsd.png)](https://david-dm.org/catalint/bluestatsd)
 
-[![NPM](https://nodei.co/npm/hapi-statsd.png?downloads=true&stars=true)](https://nodei.co/npm/hapi-statsd/)
+[![NPM](https://nodei.co/npm/bluestatsd.png?downloads=true&stars=true)](https://nodei.co/npm/bluestatsd/)
 
 A hapi plugin for sending request round trip metrics to statsd, also exposing statsd client to the server.
 
@@ -30,7 +30,7 @@ Don't forget to bump the version in the `package.json` using the [semver](http:/
 
 ## Installation
 
-	npm install hapi-statsd
+	npm install bluestatsd
 
 ## Usage
 
@@ -42,9 +42,9 @@ var server = new Hapi.Server();
 
 var hapiStatsdConfig = {};
 
-server.register({ register: require('hapi-statsd'), options: hapiStatsdConfig }, function(err) {
+server.register({ register: require('bluestatsd'), options: hapiStatsdConfig }, function(err) {
 	if (err) {
-		console.log('error', 'Failed loading plugin: hapi-statsd');
+		console.log('error', 'Failed loading plugin: bluestatsd');
 	}
 });
 ```
@@ -115,24 +115,16 @@ server.statsd.set('your.set', 200);
 
 ### Currently compatible with: Hapi 13.x.x (Node v4)
 
-* 0.1.x - Hapi 1.x.x
-* 0.2.x - Hapi 3.x.x
-* 0.3.x - Hapi 3.x.x
-* 0.4.x - Hapi 4.x.x
-* 1.0.x - Hapi 6.x.x
-* 1.1.x - Hapi 7.x.x
-* 1.2.x - Hapi 8.x.x
-* 2.x.x - Hapi 9.x.x
-* 3.x.x - Hapi 10.x.x (Node v4)
-* 4.x.x - Hapi 11.x.x
-* 4.x.x - Hapi 12.x.x
-* 4.x.x - Hapi 13.x.x
+* 5.x.x - Hapi 11.x.x
+* 5.x.x - Hapi 12.x.x
+* 5.x.x - Hapi 13.x.x
 
 # License
 
 The MIT License (MIT)
 
 Copyright (c) 2013 Mac Angell
+Copyright (c) 2016 Catalin Tanasescu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
