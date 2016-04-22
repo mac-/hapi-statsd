@@ -1,7 +1,7 @@
 # bluestatsd
 
 [![Build Status](https://secure.travis-ci.org/catalint/bluestatsd.png)](http://travis-ci.org/catalint/bluestatsd)
-[![Coverage Status](https://coveralls.io/repos/catalint/bluestatsd/badge.png)](https://coveralls.io/r/catalint/bluestatsd)
+[![Coverage Status](https://coveralls.io/repos/github/catalint/bluestatsd/badge.svg?branch=master)](https://coveralls.io/github/catalint/bluestatsd?branch=master)
 [![Code Climate](https://codeclimate.com/github/catalint/bluestatsd.png)](https://codeclimate.com/github/catalint/bluestatsd)
 [![NPM version](https://badge.fury.io/js/bluestatsd.png)](http://badge.fury.io/js/bluestatsd)
 [![Dependency Status](https://david-dm.org/catalint/bluestatsd.png)](https://david-dm.org/catalint/bluestatsd)
