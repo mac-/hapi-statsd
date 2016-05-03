@@ -7,7 +7,6 @@
 	"version": "5.0.0",
 	"dependencies": {
 		"statsd-client": "0.x.x",
-		"eidetic": "0.x.x",
 		"hoek": "3.x.x"
 	},
 	"devDependencies": {
