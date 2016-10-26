@@ -81,6 +81,25 @@ The prefix to add to every stat collected. Usually used for grouping a set of st
 
 A character or set of characters to replace the '/' (forward slash) characters in your URL path since forward slashes cannot be used in stat names. Defaults to `'_'`
 
+### `defaultFilter`
+
+Defines whether increment and timer stats are turned on by default. Defaults to `{ enableCounter: true, enableTimer: true }`.
+
+### `filters`
+
+An array of custom filters. A match is determined as follows:
+
+* Check if the filter has an `id` field and see if it matches the route's unique ID
+* Check for `path`, `method` and `status` matching the route and response
+  * Omitting `path`, `method` and `status` results in a wildcard behavior matching of anything
+
+In addition to matching, the field can contain the following configuration options:
+
+* name: Defines a custom name for the stat to be reported
+* enableTimer: Enable/disable the timer stat from being reported
+* enableCounter: Enable/disable the count stat from being reported
+
+Matches by the route's unique ID. This match takes precedence over all other types of matching
 
 ## Example
 
