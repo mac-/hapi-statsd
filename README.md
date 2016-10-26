@@ -91,7 +91,7 @@ An array of custom filters. A match is determined as follows:
 
 * Check if the filter has an `id` field and see if it matches the route's unique ID
 * Check for `path`, `method` and `status` matching the route and response
-  * Omitting `path`, `method` and `status` results in a wildcard behavior matching of anything
+  * Omitting `path`, `method` or `status` results in a wildcard behavior matching of anything
 
 In addition to matching, the field can contain the following configuration options:
 
