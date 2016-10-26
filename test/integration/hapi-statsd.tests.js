@@ -96,6 +96,16 @@ describe('hapi-statsd plugin tests', function() {
 		});
 	});
 
+	it('should use cached value', function(done) {
+		server.inject('/override', function() {
+			server.inject('/override', function() {
+				assert(mockStatsdClient.incStat == 'override.GET.200');
+				assert(mockStatsdClient.timingStat == '');
+				done();
+			});
+		});
+	});
+
 	it('should rename stat', function(done) {
 		server.inject('/rename', function(res) {
 			assert(mockStatsdClient.incStat == 'rename_stat');
