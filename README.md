@@ -99,7 +99,20 @@ In addition to matching, the field can contain the following configuration optio
 * enableTimer: Enable/disable the timer stat from being reported
 * enableCounter: Enable/disable the count stat from being reported
 
-Matches by the route's unique ID. This match takes precedence over all other types of matching
+Example configuration:
+```js
+defaultFilter: { // by default, enable timer and disable counter stats
+    enableCounter: false,
+    enableTimer: true,
+}
+filters: [
+    { path: '/', enableCounter: true }, // enable counters (keep timers on as well) for this path
+    { path: '/test/{param}', enableCounter: true }, // path with a parameter
+    { path: '/rename', name: 'rename_stat' }, // rename the metric
+    { id: 'match-my-id', enableCounter: true, enableTimer: true }, // match by route id
+    { status: 407, name: 'match_on_status', enableCounter: true, enableTimer: true }, // match by status code
+]
+````
 
 ## Example
 
