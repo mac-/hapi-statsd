@@ -87,11 +87,14 @@ Defines whether increment and timer stats are turned on by default. Defaults to 
 
 ### `filters`
 
-An array of custom filters. A match is determined as follows:
-
-* Check if the filter has an `id` field and see if it matches the route's unique ID
-* Check for `path`, `method` and `status` matching the route and response
-  * Omitting `path`, `method` or `status` results in a wildcard behavior matching of anything
+An array of custom filters. A successful match requires one of these fields to be defined and match the route: 
+* `id`: The route id defined in the route's config
+* `path`: The path defined in the route
+* `method`: The HTTP method of the request/route
+* `status`: The returned HTTP status code of the response
+ 
+Parameters that are not included are considered wildcard and will match all values. Note that if none of these 
+parameters are included in the filter, then you will get a match on ALL route-response combinations.
 
 In addition to matching, the field can contain the following configuration options:
 
