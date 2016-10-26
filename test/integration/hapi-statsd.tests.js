@@ -36,6 +36,10 @@ beforeEach(function(done) {
 		reply(new Error());
 	};
 
+	var err407 = function (request, reply) {
+		reply('error').statusCode = 407;
+	};
+
 	server.route({ method: ['GET','OPTIONS'], path: '/', handler: get, config: {cors: true} });
 	server.route({ method: 'GET', path: '/err', handler: err, config: {cors: true} });
 	server.route({ method: 'GET', path: '/test/{param}', handler: get, config: {cors: true} });
@@ -43,6 +47,8 @@ beforeEach(function(done) {
 	server.route({ method: 'GET', path: '/override', handler: get, config: {cors: true} });
 	server.route({ method: 'GET', path: '/rename', handler: get, config: {cors: true} });
 	server.route({ method: 'GET', path: '/match/id', handler: get, config: {id: 'match-my-id', cors: true} });
+	server.route({ method: 'POST', path: '/match/method', handler: get, config: { cors: true} });
+	server.route({ method: 'GET', path: '/match/status', handler: err407, config: { cors: true} });
 
 	server.register({
 		register: plugin,
@@ -59,6 +65,8 @@ beforeEach(function(done) {
 				{ path: '/override', enableCounter: true, enableTimer: false },
 				{ path: '/rename', name: 'rename_stat', enableCounter: true, enableTimer: true },
 				{ id: 'match-my-id', name: 'match_id_stat', enableCounter: true, enableTimer: true },
+				{ method: 'POST', name: 'match_on_post', enableCounter: true, enableTimer: true },
+				{ status: 407, name: 'match_on_status', enableCounter: true, enableTimer: true },
 			],
 		},
 	}, done);
@@ -118,6 +126,22 @@ describe('hapi-statsd plugin tests', function() {
 		server.inject('/match/id', function(res) {
 			assert(mockStatsdClient.incStat == 'match_id_stat');
 			assert(mockStatsdClient.timingStat == 'match_id_stat');
+			done();
+		});
+	});
+
+	it('should match on request method', function(done) {
+		server.inject({method: 'POST', url: '/match/method'}, function(res) {
+			assert(mockStatsdClient.incStat == 'match_on_post');
+			assert(mockStatsdClient.timingStat == 'match_on_post');
+			done();
+		});
+	});
+
+	it('should match on status code', function(done) {
+		server.inject('/match/status', function(res) {
+			assert(mockStatsdClient.incStat == 'match_on_status');
+			assert(mockStatsdClient.timingStat == 'match_on_status');
 			done();
 		});
 	});
