@@ -81,6 +81,10 @@ The prefix to add to every stat collected. Usually used for grouping a set of st
 
 A character or set of characters to replace the '/' (forward slash) characters in your URL path since forward slashes cannot be used in stat names. Defaults to `'_'`
 
+### `includeMetricTypeInName`
+
+A boolean to differentiate the metric names. If this is true, the metric names will contain `.counter` and `.timer` suffixes. Defaults to `false`
+
 
 ## Example
 
