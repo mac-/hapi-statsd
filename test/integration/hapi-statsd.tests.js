@@ -54,22 +54,22 @@ describe('hapi-statsd plugin tests', function() {
 
 	it('should report stats with no path in stat name', async function() {
 		await server.inject('/');
-		assert(mockStatsdClient.incStat == 'GET.200.counter');
-		assert(mockStatsdClient.timingStat == 'GET.200.timer');
+		assert(mockStatsdClient.incStat == 'GET.200');
+		assert(mockStatsdClient.timingStat == 'GET.200');
 		assert(mockStatsdClient.timingDate instanceof Date);		
 	});
 
 	it('should report stats with path in stat name', async function() {
 		await server.inject('/test/123');
-		assert(mockStatsdClient.incStat == 'test_{param}.GET.200.counter');
-		assert(mockStatsdClient.timingStat == 'test_{param}.GET.200.timer');
+		assert(mockStatsdClient.incStat == 'test_{param}.GET.200');
+		assert(mockStatsdClient.timingStat == 'test_{param}.GET.200');
 		assert(mockStatsdClient.timingDate instanceof Date);
 	});
 
 	it('should report stats with generic not found path', async function() {
 		await server.inject('/fnord')
-		assert(mockStatsdClient.incStat == '{notFound*}.GET.404.counter');
-		assert(mockStatsdClient.timingStat == '{notFound*}.GET.404.timer');
+		assert(mockStatsdClient.incStat == '{notFound*}.GET.404');
+		assert(mockStatsdClient.timingStat == '{notFound*}.GET.404');
 		assert(mockStatsdClient.timingDate instanceof Date);
 	});
 
@@ -81,8 +81,8 @@ describe('hapi-statsd plugin tests', function() {
 			},
 			url: '/'
 		})
-		assert(mockStatsdClient.incStat == '{cors*}.OPTIONS.200.counter');
-		assert(mockStatsdClient.timingStat == '{cors*}.OPTIONS.200.timer');
+		assert(mockStatsdClient.incStat == '{cors*}.OPTIONS.200');
+		assert(mockStatsdClient.timingStat == '{cors*}.OPTIONS.200');
 		assert(mockStatsdClient.timingDate instanceof Date);
 	});
 
