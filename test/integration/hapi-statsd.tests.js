@@ -27,16 +27,16 @@ beforeEach(async function() {
 	});
 
 
-	var get = function (request, reply) {
+	var get = function (request, h) {
 		return 'Success!';
 	};
 
-	var err = function (request, reply) {
+	var err = function (request, h) {
 		return new Error();
 	};
 
-	var err407 = function (request, reply) {
-		reply('error').statusCode = 407;
+	var err407 = function (request, h) {
+		return h.response('error').code(407);
 	};
 
 	server.route({ method: ['GET','OPTIONS'], path: '/', handler: get, config: {cors: true} });
@@ -95,45 +95,34 @@ describe('hapi-statsd plugin tests', function() {
 	});
 
 	it('should use cached value', async function() {
-		server.inject('/override')
-			server.inject('/override', function() {
-				assert(mockStatsdClient.incStat == 'override.GET.200');
-				assert(mockStatsdClient.timingStat == '');
-				done();
-			});
-		});
+		await server.inject('/override');
+		await server.inject('/override');
+		assert(mockStatsdClient.incStat == 'override.GET.200');
+		assert(mockStatsdClient.timingStat == '');
 	});
 
-	it('should rename stat', function(done) {
-		server.inject('/rename', function(res) {
-			assert(mockStatsdClient.incStat == 'rename_stat');
-			assert(mockStatsdClient.timingStat == 'rename_stat');
-			done();
-		});
+	it('should rename stat', async function() {
+		await server.inject('/rename');
+		assert(mockStatsdClient.incStat == 'rename_stat');
+		assert(mockStatsdClient.timingStat == 'rename_stat');
 	});
 
-	it('should match on route id', function(done) {
-		server.inject('/match/id', function(res) {
-			assert(mockStatsdClient.incStat == 'match_id_stat');
-			assert(mockStatsdClient.timingStat == 'match_id_stat');
-			done();
-		});
+	it('should match on route id', async function() {
+		await server.inject('/match/id');
+		assert(mockStatsdClient.incStat == 'match_id_stat');
+		assert(mockStatsdClient.timingStat == 'match_id_stat');
 	});
 
-	it('should match on request method', function(done) {
-		server.inject({method: 'POST', url: '/match/method'}, function(res) {
-			assert(mockStatsdClient.incStat == 'match_on_post');
-			assert(mockStatsdClient.timingStat == 'match_on_post');
-			done();
-		});
+	it('should match on request method', async function() {
+		await server.inject({method: 'POST', url: '/match/method'} );
+		assert(mockStatsdClient.incStat == 'match_on_post');
+		assert(mockStatsdClient.timingStat == 'match_on_post');
 	});
 
-	it('should match on status code', function(done) {
-		server.inject('/match/status', function(res) {
-			assert(mockStatsdClient.incStat == 'match_on_status');
-			assert(mockStatsdClient.timingStat == 'match_on_status');
-			done();
-		});
+	it('should match on status code', async function() {
+		await server.inject('/match/status');
+		assert(mockStatsdClient.incStat == 'match_on_status');
+		assert(mockStatsdClient.timingStat == 'match_on_status');
 	});
 
 	it('should report stats with no path in stat name', async function() {
@@ -152,7 +141,7 @@ describe('hapi-statsd plugin tests', function() {
 
 	it('should report stats with generic not found path', async function() {
 		await server.inject('/fnord')
-		assert(mockStatsdClient.incStat == '{notFound*}.GET.404');
+		assert(mockStatsdClient.incStat == '');
 		assert(mockStatsdClient.timingStat == '{notFound*}.GET.404');
 		assert(mockStatsdClient.timingDate instanceof Date);
 	});
