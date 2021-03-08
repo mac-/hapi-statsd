@@ -17,23 +17,22 @@ var assert = require('assert'),
 	},
 	Hapi = require('hapi');
 
-beforeEach(function(done) {
+beforeEach(async function() {
 	mockStatsdClient.incStat = '';
 	mockStatsdClient.timingStat = '';
 	mockStatsdClient.timingDate = '';
-	server = new Hapi.Server();
-
-	server.connection({
+	server = new Hapi.Server({
 		host: 'localhost',
 		port: 8085
 	});
 
+
 	var get = function (request, reply) {
-		reply('Success!');
+		return 'Success!';
 	};
 
 	var err = function (request, reply) {
-		reply(new Error());
+		return new Error();
 	};
 
 	var err407 = function (request, reply) {
@@ -50,26 +49,30 @@ beforeEach(function(done) {
 	server.route({ method: 'POST', path: '/match/method', handler: get, config: { cors: true} });
 	server.route({ method: 'GET', path: '/match/status', handler: err407, config: { cors: true} });
 
-	server.register({
-		register: plugin,
-		options: {
-			statsdClient: mockStatsdClient,
-			defaultFilter: {
-				enableCounter: false,
-				enableTimer: true,
-			},
-			filters: [
-				{ path: '/', enableCounter: true },
-				{ path: '/err', enableCounter: true },
-				{ path: '/test/{param}', enableCounter: true },
-				{ path: '/override', enableCounter: true, enableTimer: false },
-				{ path: '/rename', name: 'rename_stat', enableCounter: true, enableTimer: true },
-				{ id: 'match-my-id', name: 'match_id_stat', enableCounter: true, enableTimer: true },
-				{ method: 'POST', name: 'match_on_post', enableCounter: true, enableTimer: true },
-				{ status: 407, name: 'match_on_status', enableCounter: true, enableTimer: true },
-			],
-		},
-	}, done);
+	try {
+		return await server.register({
+			plugin: plugin,
+			options: {
+				statsdClient: mockStatsdClient,
+				defaultFilter: {
+					enableCounter: false,
+					enableTimer: true,
+				},
+				filters: [
+					{ path: '/', enableCounter: true },
+					{ path: '/err', enableCounter: true },
+					{ path: '/test/{param}', enableCounter: true },
+					{ path: '/override', enableCounter: true, enableTimer: false },
+					{ path: '/rename', name: 'rename_stat', enableCounter: true, enableTimer: true },
+					{ id: 'match-my-id', name: 'match_id_stat', enableCounter: true, enableTimer: true },
+					{ method: 'POST', name: 'match_on_post', enableCounter: true, enableTimer: true },
+					{ status: 407, name: 'match_on_status', enableCounter: true, enableTimer: true },
+				],
+			}
+		});
+	} catch (error){
+		return error
+	}
 });
 
 describe('hapi-statsd plugin tests', function() {
@@ -78,34 +81,21 @@ describe('hapi-statsd plugin tests', function() {
 		assert.equal(server.statsd, mockStatsdClient);
 	});
 
-	it('should report stats with no path in stat name', function(done) {
-		server.inject('/', function(res) {
-			assert(mockStatsdClient.incStat == 'GET.200');
-			assert(mockStatsdClient.timingStat == 'GET.200');
-			assert(mockStatsdClient.timingDate instanceof Date);
-			done();
-		});
+	it('should honor default filter', async function() {
+		await server.inject('/default')
+		assert(mockStatsdClient.incStat == '');
+		assert(mockStatsdClient.timingStat == 'default.GET.200');
+		assert(mockStatsdClient.timingDate instanceof Date);
 	});
 
-	it('should honor default filter', function(done) {
-		server.inject('/default', function(res) {
-			assert(mockStatsdClient.incStat == '');
-			assert(mockStatsdClient.timingStat == 'default.GET.200');
-			assert(mockStatsdClient.timingDate instanceof Date);
-			done();
-		});
+	it('should honor filter override', async function() {
+		await server.inject('/override' );
+		assert(mockStatsdClient.incStat == 'override.GET.200');
+		assert(mockStatsdClient.timingStat == '');
 	});
 
-	it('should honor filter override', function(done) {
-		server.inject('/override', function(res) {
-			assert(mockStatsdClient.incStat == 'override.GET.200');
-			assert(mockStatsdClient.timingStat == '');
-			done();
-		});
-	});
-
-	it('should use cached value', function(done) {
-		server.inject('/override', function() {
+	it('should use cached value', async function() {
+		server.inject('/override')
 			server.inject('/override', function() {
 				assert(mockStatsdClient.incStat == 'override.GET.200');
 				assert(mockStatsdClient.timingStat == '');
@@ -146,43 +136,42 @@ describe('hapi-statsd plugin tests', function() {
 		});
 	});
 
-	it('should report stats with path in stat name', function(done) {
-		server.inject('/test/123', function(res) {
-			assert(mockStatsdClient.incStat == 'test_{param}.GET.200');
-			assert(mockStatsdClient.timingStat == 'test_{param}.GET.200');
-			assert(mockStatsdClient.timingDate instanceof Date);
-			done();
-		});
+	it('should report stats with no path in stat name', async function() {
+		await server.inject('/');
+		assert(mockStatsdClient.incStat == 'GET.200');
+		assert(mockStatsdClient.timingStat == 'GET.200');
+		assert(mockStatsdClient.timingDate instanceof Date);		
 	});
 
-	it('should report stats with generic not found path', function(done) {
-		server.inject('/fnord', function(res) {
-			assert(mockStatsdClient.incStat == '');
-			assert(mockStatsdClient.timingStat == '{notFound*}.GET.404');
-			assert(mockStatsdClient.timingDate instanceof Date);
-			done();
-		});
+	it('should report stats with path in stat name', async function() {
+		await server.inject('/test/123');
+		assert(mockStatsdClient.incStat == 'test_{param}.GET.200');
+		assert(mockStatsdClient.timingStat == 'test_{param}.GET.200');
+		assert(mockStatsdClient.timingDate instanceof Date);
 	});
 
-	it('should report stats with generic CORS path', function(done) {
-		server.inject({
+	it('should report stats with generic not found path', async function() {
+		await server.inject('/fnord')
+		assert(mockStatsdClient.incStat == '{notFound*}.GET.404');
+		assert(mockStatsdClient.timingStat == '{notFound*}.GET.404');
+		assert(mockStatsdClient.timingDate instanceof Date);
+	});
+
+	it('should report stats with generic CORS path', async function() {
+		await server.inject({
 			method: 'OPTIONS',
 			headers: {
 				Origin: 'http://test.domain.com'
 			},
 			url: '/'
-		}, function(res) {
-			assert(mockStatsdClient.incStat == '{cors*}.OPTIONS.200');
-			assert(mockStatsdClient.timingStat == '{cors*}.OPTIONS.200');
-			assert(mockStatsdClient.timingDate instanceof Date);
-			done();
-		});
+		})
+		assert(mockStatsdClient.incStat == '{cors*}.OPTIONS.200');
+		assert(mockStatsdClient.timingStat == '{cors*}.OPTIONS.200');
+		assert(mockStatsdClient.timingDate instanceof Date);
 	});
 
-	it('should not change the status code of a response', function(done) {
-		server.inject('/err', function(res) {
-			assert(res.statusCode === 500);
-			done();
-		});
+	it('should not change the status code of a response', async function() {
+		var res = await server.inject('/err')
+		assert(res.statusCode === 500);
 	});
 });
