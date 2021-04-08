@@ -81,6 +81,41 @@ The prefix to add to every stat collected. Usually used for grouping a set of st
 
 A character or set of characters to replace the '/' (forward slash) characters in your URL path since forward slashes cannot be used in stat names. Defaults to `'_'`
 
+### `defaultFilter`
+
+Defines whether increment and timer stats are turned on by default. Defaults to `{ enableCounter: true, enableTimer: true }`.
+
+### `filters`
+
+An array of custom filters. A successful match requires one of these fields to be defined and match the route: 
+* `id`: The route id defined in the route's config
+* `path`: The path defined in the route
+* `method`: The HTTP method of the request/route
+* `status`: The returned HTTP status code of the response
+ 
+Parameters that are not included are considered wildcard and will match all values. Note that if none of these 
+parameters are included in the filter, then you will get a match on ALL route-response combinations.
+
+In addition to matching, the field can contain the following configuration options:
+
+* name: Defines a custom name for the stat to be reported
+* enableTimer: Enable/disable the timer stat from being reported
+* enableCounter: Enable/disable the count stat from being reported
+
+Example configuration:
+```js
+defaultFilter: { // by default, enable timer and disable counter stats
+    enableCounter: false,
+    enableTimer: true,
+}
+filters: [
+    { path: '/', enableCounter: true }, // enable counters (keep timers on as well) for this path
+    { path: '/test/{param}', enableCounter: true }, // path with a parameter
+    { path: '/rename', name: 'rename_stat' }, // rename the metric
+    { id: 'match-my-id', enableCounter: true, enableTimer: true }, // match by route id
+    { status: 407, name: 'match_on_status', enableCounter: true, enableTimer: true }, // match by status code
+]
+````
 
 ## Example
 
