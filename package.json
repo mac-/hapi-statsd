@@ -4,13 +4,13 @@
 	"contributors": [
 		"Mac Angell <mac.ang311@gmail.com>"
 	],
-	"version": "8.0.1",
+	"version": "9.0.0",
 	"dependencies": {
 		"@hapi/hoek": "^9.2.0",
 		"statsd-client": "^0.4.6"
 	},
 	"devDependencies": {
-		"@hapi/hapi": "^20.1.2",
+		"@hapi/hapi": "^20.1.5",
 		"blanket": "^1.2.3",
 		"coveralls": "^3.0.0",
 		"jshint": "^2.9.4",
@@ -19,7 +19,7 @@
 		"travis-cov": "^0.2.5"
 	},
 	"peerDependencies": {
-		"@hapi/hapi": "^20.1.2"
+		"@hapi/hapi": "^20.1.5"
 	},
 	"keywords": [
 		"hapi",

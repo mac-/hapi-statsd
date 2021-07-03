@@ -161,6 +161,7 @@ server.statsd.set('your.set', 200);
 * 6.x.x - Hapi 16.x.x
 * 7.x.x - Hapi 17.x.x (Node v8)
 * 8.x.x - Hapi 18.x.x
+* 9.x.x - Hapi 20.x.x
 
 # License
 
