@@ -37,7 +37,7 @@ Don't forget to bump the version in the `package.json` using the [semver](http:/
 To install this plugin on your Hapi server, do something similar to this:
 
 ```js
-var Hapi = require('hapi');
+var Hapi = require('@hapi/hapi');
 var server = new Hapi.Server();
 
 var hapiStatsdConfig = {};

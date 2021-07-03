@@ -15,7 +15,7 @@ var assert = require('assert'),
 			this.timingDate = date;
 		}
 	},
-	Hapi = require('hapi');
+	Hapi = require('@hapi/hapi');
 
 beforeEach(async function() {
 	mockStatsdClient.incStat = '';
