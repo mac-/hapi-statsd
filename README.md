@@ -87,13 +87,13 @@ Defines whether increment and timer stats are turned on by default. Defaults to 
 
 ### `filters`
 
-An array of custom filters. A successful match requires one of these fields to be defined and match the route: 
+An array of custom filters. A successful match requires one of these fields to be defined and match the route:
 * `id`: The route id defined in the route's config
 * `path`: The path defined in the route
 * `method`: The HTTP method of the request/route
 * `status`: The returned HTTP status code of the response
- 
-Parameters that are not included are considered wildcard and will match all values. Note that if none of these 
+
+Parameters that are not included are considered wildcard and will match all values. Note that if none of these
 parameters are included in the filter, then you will get a match on ALL route-response combinations.
 
 In addition to matching, the field can contain the following configuration options:
@@ -145,7 +145,7 @@ server.statsd.set('your.set', 200);
 
 ## Version Compatibility
 
-### Currently compatible with: Hapi 20.x.x
+### Currently compatible with: Hapi 21.x.x
 
 * 0.1.x - Hapi 1.x.x
 * 0.2.x - Hapi 3.x.x
@@ -161,7 +161,7 @@ server.statsd.set('your.set', 200);
 * 6.x.x - Hapi 16.x.x
 * 7.x.x - Hapi 17.x.x (Node v8)
 * 8.x.x - Hapi 18.x.x
-* 9.x.x - Hapi 20.x.x (Node v12)
+* 9.x.x - Hapi 21.x.x (Node v12)
 
 # License
 
